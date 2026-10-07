@@ -1,0 +1,16 @@
+-r requirements.txt
+
+# Optional dependencies for --mode local.
+yt-dlp>=2024.1.1
+faster-whisper>=1.0.0
+# faster-whisper (<=1.2.x) calls av.open(..., metadata_errors=...), which PyAV 19
+# removed. faster-whisper itself only declares av>=11, so pin below 19 here.
+av>=11,<19
+openai>=1.0.0
+# Gemini backend: needs google-genai >= 1.0 (google.genai.errors.APIError,
+# automatic_function_calling.disable, response_mime_type). Tested with 2.28.
+google-genai>=1.0.0
+# local/clipper.py uses cv2.CascadeClassifier (Haar cascades), which OpenCV 5 removed.
+opencv-python>=4.8.0,<5
+# torch is only needed if you want CUDA Whisper. CPU works without it.
+# torch>=2.0
